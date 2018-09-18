@@ -4,7 +4,13 @@ process.stdin.on('data', data => {
   let cmd = data.toString().trim();
   const pwd = require('./pwd.js');
   const ls = require('./ls.js');
-  const fs = require('fs');
+  const cat = require('./cat.js');
+
+  if(cmd.startsWith('cat')) {
+    cmd = cmd.slice(4);
+    cat(cmd);
+
+  }
 
   if (cmd === 'pwd') {
     pwd();
@@ -12,11 +18,5 @@ process.stdin.on('data', data => {
   if (cmd === 'ls') {
     ls();
   }
-  // if (cmd === 'pwd') {
-  //   process.stdout.write(process.cwd());
-  // } else {
-  //   process.stdout.write('You typed: ' + cmd);
-  // }
 
-  // process.stdout.write('\nprompt > ');
 });
